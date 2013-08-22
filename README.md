@@ -1,11 +1,10 @@
-# BoostCake
+# BoostCakeExtended
 
-[![Build Status](https://travis-ci.org/slywalker/cakephp-plugin-boost_cake.png)](https://travis-ci.org/slywalker/cakephp-plugin-boost_cake)
-[![Total Downloads](https://poser.pugx.org/slywalker/boost_cake/d/total.png)](https://packagist.org/packages/slywalker/boost_cake)
-[![Latest Stable Version](https://poser.pugx.org/slywalker/boost_cake/v/stable.png)](https://packagist.org/packages/slywalker/boost_cake)
+This is an extension for BoostCake to provide default options for each element 
+to make it simple while using the standard notation of CakePHP. BoostCakeExtended
+is a plugin for CakePHP using Bootstrap.
 
-BoostCake is a plugin for CakePHP using Bootstrap
-
+* [The original BoostCake (not needed)](https://github.com/slywalker/cakephp-plugin-boost_cake)
 * [Bootstrap(2.3.2)](http://getbootstrap.com/2.3.2/)
 * [Bootstrap(3.0.0)](http://getbootstrap.com/)
 
