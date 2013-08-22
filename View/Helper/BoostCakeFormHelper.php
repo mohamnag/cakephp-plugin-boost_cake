@@ -16,7 +16,32 @@ class BoostCakeFormHelper extends FormHelper {
 
 	protected $_fieldName = null;
 
-/**
+        public function create($model = null, $options = array()) {
+            $options = array_merge(array(
+                    'inputDefaults' => array(
+                            'div' => 'form-group',
+                            'label' => array(
+                                    'class' => 'sr-only control-label'
+                            ),
+                            'wrapInput' => 'col col-md-12',
+                            'class' => 'form-control'
+                    ),
+                    'class' => 'well form-inline'
+            ), $options);
+            
+            return parent::create($model, $options);
+        }
+
+        public function submit($caption = null, $options = array()) {
+            $options = array_merge(array(
+                    'div' => false,
+                    'class' => 'btn btn-default'
+            ), $options);
+            
+            return parent::submit($caption, $options);
+        }
+
+                /**
  * Overwirte FormHemlper::input()
  * Generates a form input element complete with label and wrapper div
  *
@@ -105,6 +130,7 @@ class BoostCakeFormHelper extends FormHelper {
 		$inputDefaults = $this->_inputDefaults;
 		$this->_inputDefaults = array();
 
+//                $label = $this->_getLabel($fieldName, $options);
 		$html = parent::input($fieldName, $options);
 
 		$this->_inputDefaults = $inputDefaults;
@@ -125,7 +151,18 @@ class BoostCakeFormHelper extends FormHelper {
 			if (isset($options['before'])) {
 				$html = str_replace('%before%', $options['before'], $html);
 			}
-		}
+                        
+		} else if(!isset($options['placeholder'])) {
+                    $regex = '/<label.*?>(.*?)<\/label>/';
+                    if (preg_match($regex, $html, $label)) {
+                        
+                        $html = preg_replace(
+                                '/(<input )(.*?>)/',
+                                '$1placeholder="' . $label[1].'" $2',
+                                $html
+                        );    
+                    }                    
+                }
 
 		return $html;
 	}
