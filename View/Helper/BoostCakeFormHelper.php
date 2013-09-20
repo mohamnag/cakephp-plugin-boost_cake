@@ -15,7 +15,16 @@ class BoostCakeFormHelper extends FormHelper {
 	protected $_inputType = null;
 
 	protected $_fieldName = null;
+        
+        protected $_formClass = 'well form-inline';
 
+        public function __construct(View $View, $settings = array()) {
+		parent::__construct($View, $settings);
+		if (isset($settings['formClass'])) {
+			$this->_formClass = $settings['formClass'];
+		}
+	}
+        
         public function create($model = null, $options = array()) {
             
             if(is_array($model) && empty($options)){
@@ -32,7 +41,7 @@ class BoostCakeFormHelper extends FormHelper {
                             'wrapInput' => 'col col-md-12',
                             'class' => 'form-control'
                     ),
-                    'class' => 'well form-inline'
+                    'class' => $this->_formClass,
             ), $options);
             
             return parent::create($model, $options);

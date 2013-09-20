@@ -43,7 +43,26 @@ class AppController extends Controller {
 
 ## Documentation
 
-There is no separate documentation for this plugin right now, the original 
-documentation can be found here:
+If you dont find something that you need here look at the documentation of the 
+original plugin here:
 
 [BoostCake - Bootstrap Plugin for CakePHP](http://slywalker.github.io/cakephp-plugin-boost_cake/)
+
+### BoostCakeFormHelper
+
+When using this helper, you may define the following options while initiating 
+the Helper:
+
+#### formClass
+This defines which class would be set as default for the form. Default value is
+'well form-inline' but you may change it to something else like this:
+
+```
+<?php
+public $helpers = array(
+    'Form' => array(
+        'className' => 'BoostCake.BoostCakeForm',
+        'formClass' => 'well'
+    ),
+```
+
