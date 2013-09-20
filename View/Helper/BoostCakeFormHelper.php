@@ -17,6 +17,12 @@ class BoostCakeFormHelper extends FormHelper {
 	protected $_fieldName = null;
 
         public function create($model = null, $options = array()) {
+            
+            if(is_array($model) && empty($options)){
+                $options = $model;
+                $model = null;
+            }
+            
             $options = array_merge(array(
                     'inputDefaults' => array(
                             'div' => 'form-group',
