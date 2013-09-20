@@ -15,40 +15,35 @@ is a plugin for CakePHP using Bootstrap.
 
 ## Installation
 
-Ensure require is present in composer.json. This will install the plugin into Plugin/BoostCake:
-
-	{
-		"require": {
-			"slywalker/boost_cake": "*"
-		}
-	}
+Clone the code from Github.
 
 ### Enable plugin
 
-You need to enable the plugin your app/Config/bootstrap.php file:
+First you need to load the plugin in your app/Config/bootstrap.php file:
 
 `CakePlugin::load('BoostCake');`
 
 If you are already using `CakePlugin::loadAll();`, then this is not necessary.
 
+Then you have to replace the default helpers with the ones from this plugin:
+
+```
+<?php
+class AppController extends Controller {
+
+	public $helpers = array(
+		'Session',
+		'Html' => array('className' => 'BoostCake.BoostCakeHtml'),
+		'Form' => array('className' => 'BoostCake.BoostCakeForm'),
+		'Paginator' => array('className' => 'BoostCake.BoostCakePaginator'),
+	);
+
+}
+```
+
 ## Documentation
 
+There is no separate documentation for this plugin right now, the original 
+documentation can be found here:
+
 [BoostCake - Bootstrap Plugin for CakePHP](http://slywalker.github.io/cakephp-plugin-boost_cake/)
-
-## Development Policy
-
-More Simple! Simple! Simple!
-
-* Develop only those that method's $options in FormHelper unable to solve.
-* Don't develop ajax/js helper
-
-If you want to simplify the options, you can develop WrapBoostCake plugin.
-
-### What is solve in this plugin
-
-* Replace checkbox's and radio's `label`
-* Add `div` wrapping input
-* Add content before and after `input`
-* Add error class in outer `div`
-* Change pagination tags
-* Change SessionHelper::flash()`s template
