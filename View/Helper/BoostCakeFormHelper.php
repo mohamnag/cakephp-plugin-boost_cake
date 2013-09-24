@@ -151,21 +151,24 @@ class BoostCakeFormHelper extends FormHelper {
 		$this->_inputDefaults = $inputDefaults;
 
 		if ($this->_inputType === 'checkbox') {
-			if (isset($options['before'])) {
-				$html = str_replace($options['before'], '%before%', $html);
-			}
-			$regex = '/(<label.*?>)(.*?<\/label>)/';
-			if (preg_match($regex, $html, $label)) {
-				$html = preg_replace($regex, '', $html);
-				$html = preg_replace(
-					'/(<input type="checkbox".*?>)/',
-					$label[1] . '$1 ' . $label[2],
-					$html
-				);
-			}
-			if (isset($options['before'])) {
-				$html = str_replace('%before%', $options['before'], $html);
-			}
+                    if (isset($options['before'])) {
+                            $html = str_replace($options['before'], '%before%', $html);
+                    }
+                    $regex = '/(<label.*?>)(.*?<\/label>)/';
+                    if (preg_match($regex, $html, $label)) {
+                        //some default classes are not good to go with checkboxes
+                        $label[1] = str_replace('sr-only', '', $label[1]);
+                        $html = str_replace('form-control', '', $html);                            
+                        $html = preg_replace($regex, '', $html);
+                        $html = preg_replace(
+                                '/(<input type="checkbox".*?>)/',
+                                $label[1] . '$1 ' . $label[2],
+                                $html
+                        );
+                    }
+                    if (isset($options['before'])) {
+                            $html = str_replace('%before%', $options['before'], $html);
+                    }
                         
 		} else if(!isset($options['placeholder'])) {
                     $regex = '/<label.*?>(.*?)<\/label>/';
