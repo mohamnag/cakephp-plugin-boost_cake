@@ -36,7 +36,7 @@ class BoostCakeFormHelper extends FormHelper {
                     'inputDefaults' => array(
                             'div' => 'form-group',
                             'label' => array(
-                                    'class' => 'sr-only control-label'
+                                    'class' => 'control-label'
                             ),
                             'wrapInput' => 'col col-md-12',
                             'class' => 'form-control'
@@ -145,42 +145,42 @@ class BoostCakeFormHelper extends FormHelper {
 		$inputDefaults = $this->_inputDefaults;
 		$this->_inputDefaults = array();
 
-//                $label = $this->_getLabel($fieldName, $options);
 		$html = parent::input($fieldName, $options);
 
 		$this->_inputDefaults = $inputDefaults;
 
 		if ($this->_inputType === 'checkbox') {
-                    if (isset($options['before'])) {
-                            $html = str_replace($options['before'], '%before%', $html);
-                    }
-                    $regex = '/(<label.*?>)(.*?<\/label>)/';
-                    if (preg_match($regex, $html, $label)) {
-                        //some default classes are not good to go with checkboxes
-                        $label[1] = str_replace('sr-only', '', $label[1]);
-                        $html = str_replace('form-control', '', $html);                            
-                        $html = preg_replace($regex, '', $html);
-                        $html = preg_replace(
-                                '/(<input type="checkbox".*?>)/',
-                                $label[1] . '$1 ' . $label[2],
-                                $html
-                        );
-                    }
-                    if (isset($options['before'])) {
-                            $html = str_replace('%before%', $options['before'], $html);
-                    }
-                        
-		} else if(!isset($options['placeholder'])) {
-                    $regex = '/<label.*?>(.*?)<\/label>/';
-                    if (preg_match($regex, $html, $label)) {
-                        
-                        $html = preg_replace(
-                                '/(<input )(.*?>)/',
-                                '$1placeholder="' . $label[1].'" $2',
-                                $html
-                        );    
-                    }                    
-                }
+            if (isset($options['before'])) {
+                    $html = str_replace($options['before'], '%before%', $html);
+            }
+            $regex = '/(<label.*?>)(.*?<\/label>)/';
+            if (preg_match($regex, $html, $label)) {
+                //some default classes are not good to go with checkboxes
+                $label[1] = str_replace('sr-only', '', $label[1]);
+                $html = str_replace('form-control', '', $html);                            
+                $html = preg_replace($regex, '', $html);
+                $html = preg_replace(
+                        '/(<input type="checkbox".*?>)/',
+                        $label[1] . '$1 ' . $label[2],
+                        $html
+                );
+            }
+            if (isset($options['before'])) {
+                    $html = str_replace('%before%', $options['before'], $html);
+            }
+            
+        }
+        else if(!isset($options['placeholder'])) {
+            $regex = '/<label.*?>(.*?)<\/label>/';
+            if (preg_match($regex, $html, $label)) {
+                
+                $html = preg_replace(
+                        '/(<input )(.*?>)/',
+                        '$1placeholder="' . $label[1].'" $2',
+                        $html
+                );    
+            }                    
+        }
 
 		return $html;
 	}
